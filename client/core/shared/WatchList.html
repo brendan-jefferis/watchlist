@@ -14,101 +14,17 @@
 		{{yield 'nav'}}
 	</nav>
 
+	<header>
+		{{yield 'header'}}
+	</header>
+	
+	<div id="wrap">
+		<div id="main" class="container-fluid">
+			{{yield}}
+		</div>
+	</div>
+
 	<footer>
 		{{yield 'footer'}}
 	</footer>
-</template>
-
-
-
-<template name="nav">
-	<div class="navbar navbar-inverse navbar-static-top">
-		<div class="navbar-inner">
-			<a class="brand" href="/">WatchList</a>
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</a>
-			<div class="nav-collapse collapse">
-				<ul class="nav" id="nav-main">
-					<li><a href="/">My List</a></li>
-					<li><a href="/about" id="test">Add Movie</a></li>
-					<li><a href="/contact">Users</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</template>
-
-
-<template name="intro">
-	{{#unless hide}}
-	<div class="hero-unit">
-		<h1>Welcome to WatchList</h1>
-		<h4>(Work in progress!)</h4>
-		<p>It's basically a todo list for movies you want to watch, with the option to share/follow lists with friends.</p>
-		{{#if currentUser}}
-			<div href="#" class="btn btn-primary" id="hide">Ok, I get it.</div>
-		{{/if}}
-	</div>
-	{{/unless}}
-</template>
-
-
-
-<template name="login">
-	<span class="login pull-right">
-		{{loginButtons align="right"}}
-	</span>
-</template>
-
-
-
-<template name="main">
-	<div id="main-content">
-
-
-	</div>
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<template name="adminpanel">
-	{{#if admin}}
-		{{#if user_selected}}
-			<a href="#" class="btn btn-danger remove">Delete {{username}}</a>
-		{{/if}}
-	{{/if}}
-</template>
-
-
-
-<template name="footer">
-	<div class="well well-small">
-		<ul class="inline pull-right">
-			
-			<li>
-			{{#unless confirm_delete}}
-				<a href="#" id="delete">Delete My Account</a>
-			{{else}}
-				<span class="label label-important">Are you sure? <a href="#" id="confirm-delete">Yes</a> / <a href="#" id="dont-delete">No</a></span></li>
-			{{/unless}}
-		</ul>
-	</div>
 </template>

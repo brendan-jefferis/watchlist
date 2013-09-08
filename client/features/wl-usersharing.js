@@ -116,10 +116,3 @@ function adminUser (userId) {
 	var adminUser = Meteor.users.findOne({username: "admin"});
 	return (userId && adminUser && userId === adminUser._id);
 }
-
-Template.main.events({
-	'click #btn-update' : function (e,t) {
-		e.preventDefault();
-		Meteor.call("update", Meteor.userId());
-	}
-});

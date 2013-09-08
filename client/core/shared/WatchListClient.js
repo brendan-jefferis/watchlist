@@ -17,19 +17,20 @@ Session.setDefault('confirm_delete', false);
 
 
 
-////// ROUTING
+//// ROUTING
 Router.configure({
   layout: 'layout',
   notFoundTemplate: 'notFound',
   loadingTemplate: 'loading',
   renderTemplates: {
     'nav' : { to: 'nav' },
+    'header' : { to: 'header' },
     'footer' : { to: 'footer' }
   },
   onAfterRun: function () {
     // 1ms delay to wait for <body> to contain routed content
     setTimeout(function() {
-      //setActiveNav();
+      setActiveNav();
     }, 1);
   }
 });
@@ -38,20 +39,11 @@ Router.configure({
 
 
 //// TEMPLATE HELPERS
-Template.intro.helpers({
+Template.header.helpers({
   hide: function () {
     if (Meteor.user()) {
       return Meteor.user().hideIntro;
     } 
-  }
-});
-
-Template.main.helpers({
-  count : function () {
-    return (Movies.find({}).count() === 0) ? false : true;
-  },
-  show_form : function () {
-    return Session.equals('adding_new', true);
   }
 });
 
@@ -78,18 +70,7 @@ Template.add_movie.helpers({
   }
 });
 
-Template.filters.helpers({
-  genres : function () {
-    if (Meteor.user()) {
-      var genres = Movies.find({owner: {$in: Meteor.user().following}}, {fields: {genre: 1}, sort: {genre: 1}}).fetch();
-      uniqueGenres = uniqueInArray(genres);
-      return uniqueGenres;
-    }
-  },
-  no_filter : function () {
-    return !Session.get('filter') ? "active" : "";
-  }
-});
+
 
 Template.footer.helpers({
   confirm_delete : function () {
@@ -110,17 +91,11 @@ Template.movie.can_remove = function () {
   return (this.owner === Meteor.userId()) ? true : false;
 };
 
-// RENDERING
-Template.main.rendered = function () {
-  // Basic routing
-  $('#content-tabs a[href="' + window.location.hash + '"]').tab('show');
-};
-
 
 
 
 //// EVENTS
-Template.intro.events({
+Template.header.events({
   'click #hide' : function () {
     if (Meteor.userId()) {
       Meteor.call("hideIntro");
@@ -130,16 +105,7 @@ Template.intro.events({
   }
 });
 
-Template.main.events({
-  'click .tab' : function () {
-    Session.set('current_user', null);
-    Session.set('user_selected', false);
-  },
-  'click a.tab' : function (e,t) {
-    if (e.target.hash !== undefined) {
-      location.replace(e.target.hash);  
-    }
-  },
+Template.addPage.events({
   'click #btn-add' : function (e,t) {
     var date = Session.equals('out_now', true) ? "Out Now" : t.find('#new-date').value;
     addMovie(t.find("#new-title").value, date, t.find("#new-genre").value);
@@ -169,11 +135,6 @@ Template.main.events({
   },
   'click #no-filter' : function () {
     Session.set('filter', null);
-  },
-  'click .add-movie' : function (e) {
-    e.preventDefault();
-    $('#content-tabs a[href="#add"]').tab('show');
-    Session.set('adding_new', true);
   }
 });
 
@@ -225,19 +186,10 @@ function addMovie(title, date, genre) {
     } else {
       Session.set('success', false);
     }
-
   });
 }
 
-function uniqueInArray (array) {
-  var uniqueItems = [];
-  $.each(array, function(i, el) {
-    if ($.inArray(el.genre, uniqueItems) === -1) {
-      uniqueItems.push(el.genre);
-    }
-  });
-  return uniqueItems;
-}
+
 
 function init () {
   // Reset Session vars
@@ -247,6 +199,11 @@ function init () {
     Session.set('current_user', null);
     Session.set('user_selected', false);
     Session.set('confirm_delete', false);
+}
+
+function setActiveNav () {
+  $('#nav-main li').removeClass('active');
+  $('#nav-main a[href="' + window.location.pathname + '"]').parent().addClass('active');
 }
 
 

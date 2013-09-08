@@ -2,6 +2,17 @@
 Movies = new Meteor.Collection('movies');
 Users = Meteor.users;
 
+
+
+////// ROUTING
+Router.map(function () {
+	this.route('listPage', { path: '/' });
+	this.route('addPage', { path: '/add' });
+	this.route('usersPage', { path: '/users' });
+	this.route('notFound', { path: '*'});
+});
+
+
 // Checks to see if the current user making the request to update is the admin user
 function adminUser (userId) {
 	var adminUser = Meteor.users.findOne({username: "admin"});
