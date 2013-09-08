@@ -1,3 +1,4 @@
+////// COLLECTIONS
 Movies = new Meteor.Collection('movies');
 Users = Meteor.users;
 
@@ -6,6 +7,9 @@ function adminUser (userId) {
 	var adminUser = Meteor.users.findOne({username: "admin"});
 	return (userId && adminUser && userId === adminUser._id);
 }
+
+
+////// ALLOW
 
 // Allow users control over their own content
 Movies.allow({
@@ -32,6 +36,8 @@ Meteor.users.allow({
 		return (adminUser(userId));
 	}
 });
+
+
 
 //////// METHODS
 Meteor.methods({

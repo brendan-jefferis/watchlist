@@ -1,0 +1,13 @@
+<template name="footer">
+	<div class="well well-small">
+		<ul class="inline pull-right">
+			
+			<li>
+			{{#unless confirm_delete}}
+				<a href="#" id="delete">Delete My Account</a>
+			{{else}}
+				<span class="label label-important">Are you sure? <a href="#" id="confirm-delete">Yes</a> / <a href="#" id="dont-delete">No</a></span></li>
+			{{/unless}}
+		</ul>
+	</div>
+</template>
