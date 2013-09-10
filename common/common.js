@@ -1,3 +1,7 @@
+/* Common (client/server) JS
+================================================== */
+
+
 ////// COLLECTIONS
 Movies = new Meteor.Collection('movies');
 Users = Meteor.users;
@@ -13,8 +17,8 @@ Router.map(function () {
 });
 
 
-////// ALLOW
 
+////// ALLOW
 // Allow users control over their own content
 Movies.allow({
 	insert: function (userId, doc) {
@@ -27,6 +31,7 @@ Movies.allow({
 		return (adminUser(userId) || (userId && doc.owner === userId));
 	}
 });
+
 
 // Allow Admin privileges
 Meteor.users.allow({
@@ -45,9 +50,11 @@ Meteor.users.allow({
 
 //////// METHODS
 Meteor.methods({
+
 	hideIntro : function () {
 		Meteor.users.update({_id: this.userId}, {$set: {hideIntro: true}});
 	},
+
 	//// features/wl-usersharing.js
 	followUser : function (user) {
 		if (!Meteor.user().following) {
@@ -57,15 +64,19 @@ Meteor.methods({
 			Meteor.users.update({_id: this.userId}, {$addToSet: {following: user}});
 		}
 	},
+
 	unfollowUser : function (user) {
 	  Meteor.users.update({_id: this.userId}, {$pull: {following: user}});
 	},
+
 	makePrivate : function () {
 		Meteor.users.update({_id: this.userId}, {$set: {isPrivate: true}});
 	},
+
 	makePublic : function () {
 		Meteor.users.update({_id: this.userId}, {$set: {isPrivate: false}})
 	},
+
 	// UPDATE EXISTING USERS WITH following AND isPrivate PROPERTIES
 	update : function (userId) {
 		if (adminUser(userId)) {
@@ -83,6 +94,7 @@ Meteor.methods({
 			}
 		}
 	},
+
 	cleanupArray : function (array) {
 		var newArray = [];
 		for (var i = 0, j = array.length; i < j; i++) {
@@ -92,6 +104,7 @@ Meteor.methods({
 		}
 		Meteor.users.update({_id: this.userId}, {$set: {following: newArray}});
 	},
+	
 	removeUser : function (userId) {
 		Meteor.users.remove({_id: userId});
 	}

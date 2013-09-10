@@ -1,6 +1,8 @@
 /* Core client JS
 ================================================== */
 
+
+
 //// SUBSCRIPTIONS
 Meteor.subscribe("Movies");
 Meteor.subscribe("Users");

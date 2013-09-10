@@ -1,3 +1,9 @@
+/* Add Page js
+================================================== */
+
+
+
+//// HELPERS
 Template.add_movie.helpers({
   out_now : function () {
     return Session.equals('out_now', true);
@@ -20,6 +26,7 @@ Template.add_movie.helpers({
     }
   }
 });
+
 
 
 //// EVENTS

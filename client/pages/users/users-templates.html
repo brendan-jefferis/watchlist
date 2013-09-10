@@ -1,20 +1,46 @@
+<!-- Users page template
+
+* Displays list of other users, if user signed in
+* Allows display of other user's movies plus following/unfollowing
+* Admin has option to delete accounts individually via {{> adminpanel}}
+================================================== -->
 <template name="usersPage">
+
 	{{#if currentUser}}
 		{{> userlist}}
 	{{else}}
 		<span class="logged-out">Sign in to find other users.</span>
 	{{/if}}
+
 </template>
 
 
 
+<!-- Display user list
+================================================== -->
 <template name="userlist">
+
 	{{> adminpanel}}
-	{{#isolate}}<small class="pull-right">Your list is <a class="btn-public {{is_public}}">public</a><span class="inactive">/</span><a class="btn-private {{is_private}}">private</a></small>{{/isolate}}
+
+	<small class="pull-right">Your list is <a class="btn-public {{is_public}}">public</a><span class="inactive">/</span><a class="btn-private {{is_private}}">private</a></small>
+	
 	<h1>Users</h1>
+
+
+	<!-- Display all users 
+
+	* Iterate over Meteor.users.find({}) cursor
+	================================================== -->
 	{{#each users}}
 		{{> user}}
 	{{/each}}
+
+
+	<!-- Display other user's movie lists
+
+	* user_selected true if a.user clicked
+	* only displays table selected user has added movies to their list
+	================================================== -->
 	{{#if user_selected}}
 		{{#if show_list}}
 		<table class="table table-striped">
@@ -30,22 +56,33 @@
 			<div class="alert"><h5>{{username}} hasn't added any movies yet.</h5></div>
 		{{/if}}
 	{{/if}}
+
 </template>
 
 
 
+<!-- Display username
+
+* Features follow/unfollow toggle 
+================================================== -->
 <template name="user">
+
 	<div class="well well-small inline">
 		<a href="#" class="user">{{username}}</a>
 		<a class="btn btn-small {{following}} {{unfollow}}follow">{{#unless following}}<i class="icon-plus"></i>{{else}}<i class="icon-minus"></i>{{/unless}}</a>
-	</div>
+	</div><!-- // .well -->
+
 </template>
 
 
 
+<!-- Display user's movie as table row
+================================================== -->
 <template name="sharedmovie">
+
 	<tr class="{{genre}}">
 		<td>{{title}}</td>
 		<td>{{genre}}</td>
 	</tr>
+
 </template>

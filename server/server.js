@@ -1,9 +1,8 @@
-//// STARTUP
-Meteor.startup(function () {
-	//// UPDATE
-	Meteor.call("update");
-});
+/* Core server JS
+================================================== */
 
+
+//// PUBLISHING
 Meteor.publish("Movies", function () {
 	return Movies.find({});
 });
@@ -11,6 +10,8 @@ Meteor.publish("Movies", function () {
 Meteor.publish("Users", function () {
 	return Meteor.users.find({});
 });
+
+
 
 //// ACCOUNTS
 Accounts.onCreateUser(function (options, user) {

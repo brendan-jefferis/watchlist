@@ -1,3 +1,8 @@
+/* List Page JS
+================================================== */
+
+
+
 //// HELPERS
 Template.list.movies = function () {
   if (Meteor.user()) {
@@ -19,6 +24,7 @@ Template.listPage.helpers({
 });
 
 Template.filters.helpers({
+
   genres : function () {
     if (Meteor.user()) {
       var genres = Movies.find({owner: {$in: Meteor.user().following}}, {fields: {genre: 1}, sort: {genre: 1}}).fetch();
@@ -26,11 +32,12 @@ Template.filters.helpers({
       return uniqueGenres;
     }
   },
+
   no_filter : function () {
     return !Session.get('filter') ? "active" : "";
   }
+  
 });
-
 
 
 

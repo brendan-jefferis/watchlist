@@ -1,64 +1,103 @@
+<!-- List page template
+
+* Displays list of user's movies in a table if signed in
+* Allows filtering by genre
+* {{count}} refers to number of movies user has added
+================================================== -->
 <template name="listPage">
+
 	{{#if currentUser}}
 		{{#unless count}}
 			<span class="no-movies">You haven't added any movies yet! You should <a href="#" class="add-movie">go do that.</a></span>
 		{{else}}
-		<div class="title">
-			<h4>A List of Movies I Intend to Watch.</h4>
-		</div>
-		{{> filters}}
-		{{> list}}
+			<div class="title">
+				<h4>A List of Movies I Intend to Watch.</h4>
+			</div><!-- // .title -->
+
+			{{> filters}}
+			{{> list}}
 		{{/unless}}
 	{{else}}
 		<span class="no-movies">You haven't added any movies yet! You should <a href="#" class="add-movie">go do that.</a></span>
 	{{/if}}
+
 </template>
 
 
 
+<!-- Genre filtering buttons
+
+* Display genres of movies as nav-pills to allow filtering of list
+================================================== -->
 <template name="filters">
+
 	<ul class="nav nav-pills">
+
 		<li class="{{no_filter}}"><a href="#" id="no-filter">All <span class="badge"></span></a></li>
+
 		{{#each genres}}
 			{{> genre}}
 		{{/each}}
+
 	</ul>
+
 </template>
 
 
 
+<!-- Display movie list
+================================================== -->
 <template name="list">
+
 	<table class="table table-striped">
+
 		<thead>
 			<th>Title</th>
 			<th>Genre</th>
 			<th>Release Date</th>
 			<th>Listed By</th>
 		</thead>
+
 		{{#each movies}}
 			{{> movie}}
 		{{/each}}
+
 	</table>
+
 </template>
 
 
 
+<!-- Users page template
+
+* User can delete their own movies
+* User can't delete other, followed user's movies displayed in their list
+================================================== -->
 <template name="movie">
+
 	<tr class="{{genre}}">
+
 		<td>{{title}}</td>
 		<td>{{genre}}</td>
 		<td>{{date}}</td>
 		<td>{{username}}</td>
+
 		{{#if can_remove}}
 			<td><div class="remove icon-remove"></div></td>
 		{{else}}
 			<td></td>
 		{{/if}}
+
 	</tr>
+
 </template>
 
 
 
+<!-- Genre filter button
+================================================== -->
 <template name="genre">
+
 	<li class="{{active}}"><a href="#" class="filter {{this}}">{{this}}</a></li>
+
 </template>
