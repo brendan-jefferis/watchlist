@@ -1,0 +1,13 @@
+<!-- Admin panel
+
+* Allows admin to delete users individually
+================================================== -->
+<template name="adminpanel">
+
+	{{#if admin}}
+		{{#if user_selected}}
+			<a href="#" class="btn btn-danger remove">Delete {{username}}</a>
+		{{/if}}
+	{{/if}}
+
+</template>

@@ -1,0 +1,24 @@
+<!-- Hero unit
+
+* Displays by default for all users
+* Registered, signed-in users can dismiss with #hide button
+* Guest visitors can't dismiss it
+================================================== -->
+<template name="header">
+
+	{{#unless hide}}
+	
+	<div class="hero-unit visible-desktop">
+		<h1>Welcome to WatchList</h1>
+		<h4>(Work in progress!)</h4>
+		<p>It's basically a todo list for movies you want to watch, with the option to share/follow lists with friends.</p>
+	
+		{{#if currentUser}}
+			<div href="#" class="btn btn-primary" id="hide">Ok, I get it.</div>
+		{{/if}}
+
+	</div><!-- // .hero-unit -->
+
+	{{/unless}}
+
+</template>

@@ -13,13 +13,6 @@ Router.map(function () {
 });
 
 
-// Checks to see if the current user making the request to update is the admin user
-function adminUser (userId) {
-	var adminUser = Meteor.users.findOne({username: "admin"});
-	return (userId && adminUser && userId === adminUser._id);
-}
-
-
 ////// ALLOW
 
 // Allow users control over their own content

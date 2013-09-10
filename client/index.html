@@ -1,0 +1,70 @@
+<!-- Core template
+================================================== -->
+<head>
+	<title>WatchList</title>
+
+	<!-- Bootstrap responsiveness requirements
+	================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+</head>
+
+<!-- Body
+
+* Left blank because iron-router populates with template content using {{yield}}, as below
+================================================== -->
+<body>
+</body>
+
+
+<!-- Layout
+
+* This is the root display template
+================================================== -->
+<template name="layout">
+	
+
+	<nav>
+
+		<!--
+		* Refers to: client/core/shared/nav-templates.html
+		-------------------------------------------------- -->
+		{{yield 'nav'}}
+
+	</nav>
+
+
+	<header>
+
+		<!--
+		* Refers to: client/core/shared/header-templates.html
+		-------------------------------------------------- -->
+		{{yield 'header'}}
+
+	</header>
+	
+
+
+	<div id="wrap">
+		<div id="main" class="container-fluid">
+			
+			<!--
+			* Refers to: client/core/pages/( add | list | users )
+			-------------------------------------------------- -->
+			{{yield}}
+
+		</div><!-- // #main -->
+	</div><!-- // #wrap -->
+
+
+
+	<footer>
+		<!--
+		* Refers to: client/core/shared/footer-templates.html
+		-------------------------------------------------- -->
+		{{yield 'footer'}}
+		
+	</footer>
+
+
+</template>

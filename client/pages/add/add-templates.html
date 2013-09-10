@@ -1,0 +1,41 @@
+<template name="addPage">
+	{{#if currentUser}}
+		{{> add_movie}}
+	{{else}}
+		<span class="logged-out">Sign in to start saving movies.</span>
+	{{/if}}
+</template>
+
+
+
+<template name="add_movie">
+	<form class="span12" id="add-movie-form">
+		{{#if movie_added}}
+			<div class="confirm alert {{alert_status}}">{{confirmation}}</div>
+		{{/if}}
+		<label for="new-title">Title</label>
+		<input id="new-title" class="span12" placeholder="Enter movie title">
+		<div class="control-group">
+			<div class="controls">
+				<label class="checkbox">
+				<input type="checkbox" id="out-now">Out Now
+				</label>
+			</div>
+		</div>
+		{{#unless out_now}}
+			<label for="new-date">Release Date</label>
+			<input type="date" id="new-date">
+		{{/unless}}
+		<label for="new-genre">Genre</label>
+		<select id="new-genre" class="span12">
+			<option>Funny</option>
+			<option>Serious</option>
+			<option>SciFi</option>
+			<option>TV</option>
+			<option>Doco</option>
+			<option>Indie</option>
+			<option>Scary</option>
+		</select>
+		<div id="btn-add" class="btn btn-primary btn-block btn-large">Add</div>
+	</form>
+</template>
