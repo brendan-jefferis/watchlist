@@ -3,8 +3,7 @@ WatchList
 
 A social to do list app for movies you want to watch.
 
-Live demo http://watchlist.papio.com.au
-Backup demo http://watchlist.meteor.com
+Live demo http://watchlist.papio.com.au | mirror http://watchlist.meteor.com
 
 File Organisation
 ==================================================
