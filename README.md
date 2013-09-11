@@ -1,4 +1,4 @@
-watchlist
+WatchList
 =========
 
 A social to do list app for movies you want to watch.
@@ -9,7 +9,7 @@ Live demo http://watchlist.meteor.com
 File Organisation
 ==================================================
 
-WatchList >
+/WatchList
 
     /.meteor
         * Meteor system files, .git, packages, release info
