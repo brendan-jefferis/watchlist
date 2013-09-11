@@ -52,13 +52,5 @@ Template.addPage.events({
     if (Session.equals('movie_added', true)) {
       Session.set('movie_added', false);
     }
-  },
-  'click .filter' : function (e,t) {
-    e.preventDefault();
-    e.target.parentNode.className = "active";
-    Session.set('filter', e.target.classList[1]);
-  },
-  'click #no-filter' : function () {
-    Session.set('filter', null);
   }
 });

@@ -31,7 +31,7 @@
 ================================================== -->
 <template name="filters">
 
-	<ul class="nav nav-pills">
+	<ul class="nav nav-pills" id="filters">
 
 		<li class="{{no_filter}}"><a href="#" id="no-filter">All <span class="badge"></span></a></li>
 
@@ -98,6 +98,6 @@
 ================================================== -->
 <template name="genre">
 
-	<li class="{{active}}"><a href="#" class="filter {{this}}">{{this}}</a></li>
+	<li class="{{active}}"><a href="#{{this}}" class="filter {{this}}">{{this}}</a></li>
 
 </template>

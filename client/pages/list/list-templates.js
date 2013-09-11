@@ -24,7 +24,6 @@ Template.listPage.helpers({
 });
 
 Template.filters.helpers({
-
   genres : function () {
     if (Meteor.user()) {
       var genres = Movies.find({owner: {$in: Meteor.user().following}}, {fields: {genre: 1}, sort: {genre: 1}}).fetch();
@@ -36,7 +35,6 @@ Template.filters.helpers({
   no_filter : function () {
     return !Session.get('filter') ? "active" : "";
   }
-  
 });
 
 
@@ -55,3 +53,21 @@ Template.movie.events({
     Movies.remove(this._id);
   }
 });
+
+Template.filters.events({
+  'click #no-filter' : function () {
+    Session.set('filter', null);
+  }
+});
+
+Template.genre.events({
+  'click .filter' : function (e,t) {
+    e.preventDefault();
+    window.location.hash = e.target.classList[1];
+    Session.set('filter', e.target.classList[1]);
+  }
+});
+
+Template.genre.rendered = function () {
+  $('#filters a[href="' + window.location.hash + '"]').parent().addClass('active');
+}
