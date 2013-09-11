@@ -9,8 +9,6 @@ Live demo http://watchlist.meteor.com
 File Organisation
 ==================================================
 
-/WatchList
-
     /.meteor
         * Meteor system files, .git, packages, release info
 
